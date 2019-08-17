@@ -81,6 +81,7 @@ const ListElement = ({ data }) => {
     let actors = ''
     data.actors.map((el, i, arr) => {
         actors += `${el.f_name} ${el.l_name}`
+        if(el.surname) actors += ` ${el.surname}`
         if (i + 1 !== arr.length) actors += ', '
         return el
     })

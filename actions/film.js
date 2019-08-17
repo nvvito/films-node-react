@@ -1,10 +1,8 @@
 const FilmModel = require('../models/film')
 //controller
-class FilmAction {
-    constructor(model) {
-        this.model = model
-    }
-    getAll = async ({ page, limit, sort_field, sort_direction }) => {
+function FilmAction(model) {
+    this.model = model
+    this.getAll = async ({ page, limit, sort_field, sort_direction }) => {
         try {
             let result = await this.model.find()
                 .sort({ [sort_field]: sort_direction })
@@ -22,7 +20,7 @@ class FilmAction {
             }
         }
     }
-    getOneById = async (_id) => {
+    this.getOneById = async (_id) => {
         try {
             let result = await this.model.findById(_id)
             if (result) return result
@@ -37,7 +35,7 @@ class FilmAction {
             }
         }
     }
-    createOne = async (data) => {
+    this.createOne = async (data) => {
         try {
             let result = await this.model(data).save()
             return result
@@ -48,7 +46,7 @@ class FilmAction {
             }
         }
     }
-    updateOneById = async (_id, data) => {
+    this.updateOneById = async (_id, data) => {
         try {
             let result = await this.model.findByIdAndUpdate(_id, data, { new: true, runValidators: true, useFindAndModify: false })
             if (result) return result
@@ -64,7 +62,7 @@ class FilmAction {
         }
 
     }
-    deleteOneById = async (_id) => {
+    this.deleteOneById = async (_id) => {
         try {
             let result = await this.model.findByIdAndDelete(_id, { useFindAndModify: false })
             if (result) return result
@@ -79,10 +77,10 @@ class FilmAction {
             }
         }
     }
-    searchByNameAndActorName = async (name) => {
+    this.searchByNameAndActorName = async (name) => {
         try {
             let result = await this.model.find()
-                .or([{ name: { $regex: name } }, { 'actors.f_name': { $regex: name } }, { 'actors.l_name': { $regex: name } }])
+                .or([{ name: { $regex: name } }, { 'actors.f_name': { $regex: name } }, { 'actors.l_name': { $regex: name } }, { 'actors.surname': { $regex: name } }])
                 .limit(4)
             return result
         } catch (error) {
@@ -92,7 +90,7 @@ class FilmAction {
             }
         }
     }
-    import = async (data) => {
+    this.import = async (data) => {
         try {
             let result = await this.model.insertMany(data)
             return result

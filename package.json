@@ -7,7 +7,7 @@
     "dev_server": "npm i && nodemon index.js",
     "dev_client": "cd ./client/ && npm i && npm start",
     "dev": "npm run dev_server & npm run dev_client",
-    "start": "node index.js"
+    "start": "npm i && node index.js"
   },
   "author": "vito",
   "license": "ISC",

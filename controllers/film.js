@@ -1,11 +1,9 @@
 const FilmAction = require('../actions/film')
 const Joi = require('@hapi/joi')
 
-class FilmController {
-    constructor(action) {
-        this.action = action
-    }
-    getAll = async (req, res) => {
+function FilmController(action) {
+    this.action = action
+    this.getAll = async (req, res) => {
         //validate query
         let query = Joi.validate(req.query, paginationSchema)
         if (!query.error) {
@@ -24,7 +22,7 @@ class FilmController {
             message: query.error
         })
     }
-    getOneById = async (req, res) => {
+    this.getOneById = async (req, res) => {
         //params
         let { id } = req.params
         //call method
@@ -38,7 +36,7 @@ class FilmController {
             message: result.message
         })
     }
-    createOne = async (req, res) => {
+    this.createOne = async (req, res) => {
         //params
         let data = req.body
         //call method
@@ -52,7 +50,7 @@ class FilmController {
             message: result.message
         })
     }
-    updateOneById = async (req, res) => {
+    this.updateOneById = async (req, res) => {
         //params
         let { id } = req.params
         let data = req.body
@@ -67,7 +65,7 @@ class FilmController {
             message: result.message
         })
     }
-    deleteOneById = async (req, res) => {
+    this.deleteOneById = async (req, res) => {
         //params
         let { id } = req.params
         //call method
@@ -81,7 +79,7 @@ class FilmController {
             message: result.message
         })
     }
-    searchByNameAndActorName = async (req, res) => {
+    this.searchByNameAndActorName = async (req, res) => {
         //params
         let { name } = req.body
         // validate name
@@ -101,7 +99,7 @@ class FilmController {
             message: 'Name not given'
         })
     }
-    import = async (req, res) => {
+    this.import = async (req, res) => {
         let { data } = req.body
         if (data) {
             //call method

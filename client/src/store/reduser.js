@@ -22,7 +22,6 @@ export const initialState = {
     },
     import: {
         load: false,
-        result: false,
     }
 }
 
@@ -96,13 +95,9 @@ export function reduser(state = initialState, action) {
             return { ...state, search: { ...state.search, result: action.payload } }
         //import=
         case 'IMPORT_START':
-            return { ...state, import: { load: true, result: false, } }
-        case 'IMPORT_RESET':
-            return { ...state, import: { load: false, result: false, } }
-        case 'IMPORT_FAILED':
-            return { ...state, import: { load: false, result: false, } }
-        case 'IMPORT_SUCCESS':
-            return { ...state, import: { load: false, result: true, } }
+            return { ...state, import: { load: true, } }
+        case 'IMPORT_END':
+            return { ...state, import: { load: false, } }
         default:
             return state
     }

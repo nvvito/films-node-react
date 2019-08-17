@@ -108,7 +108,12 @@ const RenderCard = ({ data, filmChangeName, filmChangeDate, filmChangeFormat, fi
         <span>Name:</span>
         <Input value={data.name} onChange={filmChangeName} placeholder="Name..." style={{ width: '100%' }} />
         <span>Release:</span>
-        <DatePicker value={data.release ? moment(data.release) : null} onChange={filmChangeDate} style={{ width: '100%' }} />
+        <DatePicker
+            value={data.release ? moment(data.release) : null}
+            onChange={filmChangeDate}
+            style={{ width: '100%' }}
+            disabledDate={current => (current && current > moment().endOf('day')) || current < moment('1849-12-31').endOf('day')}
+        />
         <span>Format:</span>
         <Select value={data.format} onChange={filmChangeFormat} style={{ width: '100%' }}>
             {

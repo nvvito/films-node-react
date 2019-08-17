@@ -24,8 +24,10 @@ class EditableTagGroup extends React.Component {
         const { inputValue } = this.state
         let { actors } = this.props
         let actor = inputValue.split(' ').filter(el => el !== '')
-        if (actor.length === 2) {
-            actors = [...actors, { f_name: actor[0], l_name: actor[1] }]
+        if (actor.length === 2 || actor.length === 3) {
+            let el = { f_name: actor[0], l_name: actor[1] }
+            if(actor.length === 3) el.surname = actor[2]
+            actors = [...actors, el]
             this.setState({
                 inputVisible: false,
                 inputValue: '',
@@ -50,6 +52,7 @@ class EditableTagGroup extends React.Component {
                 {
                     actors.map((actor, i) => {
                         let tag = `${actor.f_name} ${actor.l_name}`
+                        if(actor.surname) tag+=` ${actor.surname}`
                         const isLongTag = tag.length > 20
                         const tagElem = (
                             <Tag key={tag} closable onClose={() => this.handleClose(i)}>

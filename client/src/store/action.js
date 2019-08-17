@@ -200,19 +200,20 @@ export const importData = data => dispatch => {
     .then(response => response.json())
     .then(result => {
       setTimeout(() => {
-        if (result.status) dispatch({ type: 'IMPORT_SUCCESS' })
+        if (result.status) {
+          message.success('Import success!')
+          dispatch({ type: 'IMPORT_END' })
+        }
         else {
           console.log(result)
-          message.error('Search Error!')
-          dispatch({ type: 'IMPORT_FAILED' })
+          message.error('Import Error!')
+          dispatch({ type: 'IMPORT_END' })
         }
       }, 500)
     })
     .catch(err => {
       console.log(err)
-      message.error('Search Error!')
-      dispatch({ type: 'IMPORT_FAILED' })
+      message.error('Import Error!')
+      dispatch({ type: 'IMPORT_END' })
     })
 }
-
-export const importReset = () => ({ type: 'IMPORT_RESET' })
